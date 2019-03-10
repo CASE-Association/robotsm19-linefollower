@@ -1,6 +1,7 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
+// The AIN,BIN, STBY pins might not be correct since a deine with A0 did not work.
 #define AIN1 23 // A0
 #define AIN2 24 // A1
 #define BIN1 25 // A2
@@ -16,6 +17,7 @@ void setLeftPWM(int);
 void setRightPWM(int);
 
 
+#define turnMotorsOff(void) setLeftPWM(0); setRightPWM(0)
 
 #endif
 
