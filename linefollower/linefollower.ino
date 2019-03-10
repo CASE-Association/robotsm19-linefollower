@@ -9,7 +9,7 @@
    Things to implement:
    LED - ok
    Button - ok
-   Motor - (setup and basic commado to ease writing speeds to the motors)
+   Motor - ok
    Encoder - (setup, interrupts and basic commands for getting encoder data)
    Control - (Control loop for maintaining a certain speed and acceleration)
    Sensors - (Setup and basic commands for reading data from the sensors)
@@ -20,16 +20,17 @@
 // Important - Rember to only include library files such as <Wire.h> in this file (the main file) because of how the compiler works in Arduino IDE.
 #include "led.h"
 #include "button.h"
+#include "motor.h"
 
 
 void setup() {
   // put your setup code here, to run once:
   ledSetup();
-  buttonSetup();
+  //buttonSetup();
+  motorSetup();
 
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
 
 }

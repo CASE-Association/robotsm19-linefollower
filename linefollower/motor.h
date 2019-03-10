@@ -1,9 +1,14 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
-//Motor driver pins AIN1, AIN2, BIN1, BIN2, STBY has not yet been assigned to pins
-#define PWMA 9
-#define PWMB 3
+#define AIN1 23 // A0
+#define AIN2 24 // A1
+#define BIN1 25 // A2
+#define BIN2 26 // A3
+#define STBY 27 // A4
+#define PWMA 9  // Right Motor D9
+#define PWMB 3  // Left Motor D3
+
 
 
 void motorSetup(void);
