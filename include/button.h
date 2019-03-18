@@ -2,12 +2,12 @@
 #define BUTTON_H
 
 
-#define BUTTON1 12
-#define BUTTON2 11
+#define BUTTON_RIGHT 12
+#define BUTTON_LEFT 11
 
 void buttonSetup(void);
-int readButton1(void);
-int readButton2(void);
+int readButtonRight(void);
+int readButtonLeft(void);
 
 #endif
 

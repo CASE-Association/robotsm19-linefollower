@@ -1,21 +1,24 @@
 #include "button.h"
 #include <Arduino.h>
+#include "led.h"
 
-int button1State;             // the current reading from the input pin
-int lastButton1State = HIGH;  // the previous reading from the input pin
-int button2State;
-int lastButton2State = HIGH;
+// Buttons are configured with PULLUP resistors => 5V default, 0V when pressed.
 
-unsigned long lastDebounce1Time = 0;  // the last time the output pin was toggled
-unsigned long lastDebounce2Time = 0;
+int buttonRightState;             // the current reading from the input pin
+int lastButtonRightState = HIGH;  // the previous reading from the input pin
+int buttonLeftState;
+int lastButtonLeftState = HIGH;
+
+unsigned long lastDebounceRightTime = 0;  // the last time the output pin was toggled
+unsigned long lastDebounceLeftTime = 0;
 unsigned long debounceDelay = 50;  // the debounce time; increase if the output flickers
 
 /*
  * @brief Function for setting up pushbuttons. Implemeted with internal pullup resistors.
  */
 void buttonSetup(void) {
-    pinMode(BUTTON1, INPUT_PULLUP);
-    pinMode(BUTTON2, INPUT_PULLUP);
+    pinMode(BUTTON_RIGHT, INPUT_PULLUP);
+    pinMode(BUTTON_LEFT, INPUT_PULLUP);
 }
 
 /*
@@ -23,27 +26,30 @@ void buttonSetup(void) {
  *        Has to be called consecutivly to know if the button was pressed or if it was noise.
  * @return (int) 0 means no press, positive means pressed.
  */
-int readButton1(void) {
-    int reading = digitalRead(BUTTON1);
-
+int readButtonRight(void) {
+    int buttonRightState = digitalRead(BUTTON_RIGHT);
+    int returnVal = 0;
     // check to see if you just pressed the button
     // (i.e. the input went from HIGH to LOW),  and you've waited
     // long enough since the last press to ignore any noise:
 
     // If the switch changed, due to noise or pressing:
-    if (reading != lastButton1State) {
+    if (buttonRightState != lastButtonRightState) {
         // reset the debouncing timer
-        lastDebounce1Time = millis();
+        lastDebounceRightTime = millis();
     }
 
-    if ((millis() - lastDebounce2Time) > debounceDelay) {
+    if ((millis() - lastDebounceRightTime) > debounceDelay) {
         // whatever the reading is at, it's been there for longer
         // than the debounce delay, so take it as the actual current state:
-        return 1;
+        if (!buttonRightState) {
+            // Pullup to 5V => Normally 5V, Pressed 0V
+            returnVal = 1;
+        }
     }
 
-    lastButton1State = reading;
-    return 0;
+    lastButtonRightState = buttonRightState;
+    return returnVal;
 }
 
 /*
@@ -51,25 +57,28 @@ int readButton1(void) {
  *         Has to be called consecutivly to know if the button was pressed or if it was noise.
  * @return (int) 0 means no press, positive means pressed.
  */
-int readButton2(void) {
-    int reading = digitalRead(BUTTON2);
-
+int readButtonLeft(void) {
+    int buttonLeftState = digitalRead(BUTTON_LEFT);
+    int returnVal = 0;
     // check to see if you just pressed the button
     // (i.e. the input went from HIGH to LOW),  and you've waited
     // long enough since the last press to ignore any noise:
 
     // If the switch changed, due to noise or pressing:
-    if (reading != lastButton2State) {
+    if (buttonLeftState != lastButtonLeftState) {
         // reset the debouncing timer
-        lastDebounce2Time = millis();
+        lastDebounceLeftTime = millis();
     }
 
-    if ((millis() - lastDebounce2Time) > debounceDelay) {
+    if ((millis() - lastDebounceLeftTime) > debounceDelay) {
         // whatever the reading is at, it's been there for longer
         // than the debounce delay, so take it as the actual current state:
-        return 1;
+        if (!buttonLeftState) {
+            // Pullup to 5V => Normally 5V, Pressed 0V
+            returnVal = 1;
+        }
     }
 
-    lastButton2State = reading;
-    return 0;
+    lastButtonLeftState = buttonLeftState;
+    return returnVal;
 }

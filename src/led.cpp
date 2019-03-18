@@ -7,7 +7,6 @@
 void ledSetup() {
     pinMode(LED_R, OUTPUT);
     pinMode(LED_O, OUTPUT);
-    pinMode(LED_PCB, OUTPUT);
 }
 
 void testLEDS(){
@@ -16,9 +15,6 @@ void testLEDS(){
     delay(500);
 
     LED_O_ON();
-    delay(500);
-
-    LED_PCB_ON();
     delay(500);
 
     turnOffLEDS();

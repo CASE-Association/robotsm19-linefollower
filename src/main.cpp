@@ -11,12 +11,12 @@
 
 /*
    Things to implement:
-   LED - Implemented - NOT TESTED
-   Button - Implemented - NOT TESTED
-   Motor - Implemented - NOT TESTED
+   LED - Implemented - Verified
+   Button - Implemented - Verified
+   Motor - Implemented - Verified
    Encoder - Implemented - NOT TESTED
    Control - (Control loop for maintaining a certain speed and acceleration)
-   Sensors - Implemented  - NOT TESTED
+   Sensors - Implemented  - Verified
    Algorithm - (The algorithm used to decide how to drive the robot, this will probably not be needed in the start since the controller will take care of it. Only if we need more advanced techics.
 */
 
@@ -26,6 +26,7 @@
 #include "encoder.h"
 #include "led.h"
 #include "motor.h"
+#include "sensor.h"
 #include "misc.h"
 
 //Used for testing encoders
@@ -43,11 +44,22 @@ void setup() {
 
     delay(100);
     Serial.println("------  CASE - RobotSM19 - Linefollower  ------");
+    Serial.println("------  Press right button to start  ------");
+
+    while(!readButtonRight());
+    Serial.println("------ Let's go in 1s ------");
+    LED_O_ON();
+    delay(1000);
 }
 
 void loop() {
-    testLEDS();
+
+    //Writing to STBY on the motor driver should not be needed here, it doesn't work in in the setup for some reason.
+    //Try putting it in the setup but at the buttom.
+    //digitalWrite(STBY, HIGH);
+    //testMotors();
     
+    //motorSweep();
 
     //testMotors();
     /*

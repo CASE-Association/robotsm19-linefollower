@@ -8,8 +8,25 @@ void sensorSetup(void){
     pinMode(SENSOR_RIGHT, INPUT);
 }
 
+void testSensors(void){
+    Serial.print("Left: ");
+    Serial.print(readLeftSensor());
+    Serial.print("  ---  Middle: ");
+    Serial.print(readMiddleSensor());
+    Serial.print("  ---  Right: ");
+    Serial.println(readRightSensor());
+    delay(100);
+}
+
+
+// BLACK => No LED => 5V
+// White => LED => 0V
 int readLeftSensor(){
-    return digitalRead(SENSOR_LEFT);
+    int reading = analogRead(SENSOR_LEFT);
+    if(reading > 512)
+        return 1;
+    else
+        return 0;
 }
 
 int readMiddleSensor(){
@@ -17,5 +34,9 @@ int readMiddleSensor(){
 }
 
 int readRightSensor(){
-    return digitalRead(SENSOR_RIGHT);
+    int reading = analogRead(SENSOR_RIGHT);
+    if(reading > 512)
+        return 1;
+    else
+        return 0;
 }
