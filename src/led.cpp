@@ -5,21 +5,22 @@
  * @brief Function for setting up the LEDs
  */
 void ledSetup() {
-    pinMode(LED1, OUTPUT);
-    pinMode(LED2, OUTPUT);
-    pinMode(LED3, OUTPUT);
+    pinMode(LED_R, OUTPUT);
+    pinMode(LED_O, OUTPUT);
+    pinMode(LED_PCB, OUTPUT);
 }
 
 void testLEDS(){
     //Turn on 1 at a time, then turn off both at the same time.
-    LED1_ON();
+    LED_R_ON();
     delay(500);
 
-    LED2_ON();
+    LED_O_ON();
     delay(500);
 
-    LED3_ON();
+    LED_PCB_ON();
     delay(500);
 
     turnOffLEDS();
+    delay(500);
 }
