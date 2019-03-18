@@ -10,7 +10,7 @@
    LED - ok
    Button - ok
    Motor - ok
-   Encoder - (setup, interrupts and basic commands for getting encoder data)
+   Encoder - ok
    Control - (Control loop for maintaining a certain speed and acceleration)
    Sensors - (Setup and basic commands for reading data from the sensors)
    Algorithm - (The algorithm used to decide how to drive the robot, this will probably not be needed in the start since the controller will take care of it. Only if we need more advanced techics.
@@ -21,13 +21,15 @@
 #include "led.h"
 #include "button.h"
 #include "motor.h"
+#include "encoder.h"
 
 
 void setup() {
   // put your setup code here, to run once:
   ledSetup();
-  //buttonSetup();
+  buttonSetup();
   motorSetup();
+  encoderSetup();
 
 }
 
