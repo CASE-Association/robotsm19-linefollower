@@ -6,7 +6,7 @@
 #define CPR         6.0             // Counts Per Revolution, halfed because only using 2 interrupts.
 
 float countsToSpeed(int counts, int period);
-int speedToCounts(int speed);
+ int speedToCounts(int speed);
 
 
 #endif

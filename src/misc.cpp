@@ -19,10 +19,10 @@ float countsToSpeed(int counts, int period){
  * @brief Function that converts translational velocity to counts/time
  * 
  * @param speed (mm/s)          The translational velocity.
- * @return int  (counts/ms)     The rotational velocity.
+ * @return int  (counts/s)     The rotational velocity.
  */
-int speedToCounts(int speed){
-    int counts = speed * CPR * GEAR_RATIO / (PI*WHEEL_D) / 1000;
+ int speedToCounts(int speed){
+    int counts = speed * CPR * GEAR_RATIO / (PI*WHEEL_D);
     return counts;
 }
 

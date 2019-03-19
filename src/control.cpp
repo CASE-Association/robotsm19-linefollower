@@ -12,14 +12,14 @@ int rightEncoderChange;
 int leftEncoderChange;
 
 int targetSpeedX = speedToCounts(300*2); // 300 mm/s, * 2 because of rightEncChange + leftEncChange
-int encoderFeedbackX;
+long encoderFeedbackX;
 int velErrorX;
 int oldVelErrorX;
 int posPWMX;
 
-int kpX = 1;
-int kiX = 0.1;
-int kdX = 0.5;
+float kpX = 0.2;
+float kiX = 0.1;
+float kdX = 0;
 
 void updateEncoders(void){
 	leftEncoder = getLeftEncCount();
@@ -33,12 +33,13 @@ void updateEncoders(void){
 }
 
 /**
- * @brief   Function for running the control loop for velocity control.
- *          Implemented with a PD.
+ * @brief Function for running the control loop for velocity control.
+ *        Implemented with a PD.
  * 
+ * @param period (ms) The time period between calls.
  */
-void calcMotorPWM(void){    
-	encoderFeedbackX = rightEncoderChange + leftEncoderChange;
+void calcMotorPWM(int period){    
+	encoderFeedbackX = (rightEncoderChange + leftEncoderChange) * 1000.0/period;
 	//encoderFeedbackW = rightEncoderChange - leftEncoderChange;	
 	
 	//rotationalFeedback = encoderFeedbackW;
@@ -55,6 +56,6 @@ void calcMotorPWM(void){
 	//leftBaseSpeed = posPwmX - posPwmW;
 	//rightBaseSpeed = posPwmX + posPwmW;
 
-	//setLeftPWM(posPWMX);
-	//setRightPWM(posPWMX);
+	setLeftPWM(posPWMX);
+	setRightPWM(posPWMX);
 }
