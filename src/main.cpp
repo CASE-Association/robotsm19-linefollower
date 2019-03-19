@@ -29,7 +29,8 @@
 //Used for testing encoders
 unsigned long currTime;
 unsigned long lastTime;
-
+int osvlad = 0;
+int rotSpeed = speedToCounts(50*2);
 
 void setup() {
     Serial.begin(9600);
@@ -53,29 +54,44 @@ void loop() {
     currTime = millis();
     int period = currTime - lastTime;
 
-    updateEncoders();
-    calcMotorPWM(period);
+
+    //updateEncoders();
+    //calcMotorPWM(period);
+    
+/*
+    if(currTime % 1000 > 0 && currTime % 1000 < 100){
+        Serial.print("L: ");
+        Serial.print(leftEncoderChange);
+        Serial.print(" - R: ");
+        Serial.print(rightEncoderChange);
+        Serial.print(" - T: ");
+        Serial.print(targetSpeedX);
+        Serial.print(" - FB: ");
+        Serial.print(encoderFeedbackX);
+        Serial.print(" - E: ");
+        Serial.print(velErrorX);
+        Serial.print(" - PWMX: ");
+        Serial.print(posPWMX);
 
 
-    Serial.print("L: ");
-    Serial.print(leftEncoderChange);
-    Serial.print(" - R: ");
-    Serial.print(rightEncoderChange);
-    Serial.print(" - T: ");
-    Serial.print(targetSpeedX);
-    Serial.print(" - FB: ");
-    Serial.print(encoderFeedbackX);
-    Serial.print(" - E: ");
-    Serial.print(velErrorX);
-    Serial.print(" - PWMX: ");
-    Serial.print(posPWMX);
-    Serial.print(" - S: ");
-    Serial.print(countsToSpeed((leftEncoderChange + rightEncoderChange)/2, period));
-    Serial.print("mm/s - Millis: ");
-    Serial.println(period);
+        Serial.print("----- T: ");
+        Serial.print(targetSpeedW);
+        Serial.print(" - FB: ");
+        Serial.print(encoderFeedbackW);
+        Serial.print(" - E: ");
+        Serial.print(velErrorW);
+        Serial.print(" - PWMW: ");
+        Serial.print(posPWMW);
 
+
+        Serial.print(" - S: ");
+        Serial.print(countsToSpeed((leftEncoderChange + rightEncoderChange)/2, period));
+        Serial.print("mm/s - Millis: ");
+        Serial.println(period);
+    }
+*/
     lastTime = currTime;
 
-    delay(10);
+    //delay(10);
 
 }
