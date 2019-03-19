@@ -2,10 +2,11 @@
 #define ENCODER_H
 
 
-#define HALLA1 4 // Right motor sensor
-#define HALLB1 6
-#define HALLA2 7 // left motor sensor
-#define HALLB2 8
+#define HALLA1 3 // Right motor sensor
+#define HALLB1 8
+
+#define HALLA2 2 // left motor sensor
+#define HALLB2 4
 
 // Public functions
 void encoderSetup(void);

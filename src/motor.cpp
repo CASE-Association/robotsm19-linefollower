@@ -18,7 +18,7 @@ void motorSetup(void) {
     
     //turnMotorsOff();
     //delay(500);
-    //digitalWrite(STBY, HIGH);
+    digitalWrite(STBY, HIGH);
 }
 
 /**
@@ -27,20 +27,20 @@ void motorSetup(void) {
  */
 void testMotors(void){
     Serial.println("----- Forward -----");
-    Serial.println("Left power: 20 -- Right power : 20");
-    setLeftPWM(150);
-    setRightPWM(150);
-    delay(2000);
+    Serial.println("Left power: 100 -- Right power : 100");
+    setLeftPWM(100);
+    setRightPWM(100);
+    delay(1000);
 
     Serial.println("----- STOP -----");
     turnMotorsOff();
     delay(2000);
 
     Serial.println("----- Backwards -----");
-    Serial.println("Left power: -20 -- Right power : -20");
-    setLeftPWM(-150);
-    setRightPWM(-150);
-    delay(2000);
+    Serial.println("Left power: -100 -- Right power : -100");
+    setLeftPWM(-100);
+    setRightPWM(-100);
+    delay(1000);
 
     Serial.println("----- STOP -----");
     turnMotorsOff();

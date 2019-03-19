@@ -1,7 +1,3 @@
-/**
- * @brief 
- * 
- */
 /*
    Code for CASE line following robot that will be attending the Robot Championship in Sweden 2019.
    Authors:
@@ -23,14 +19,15 @@
 // Important - Rember to only include library files such as <Wire.h> in this file (the main file) because of how the compiler works in Arduino IDE.
 #include <Arduino.h>
 #include "button.h"
-#include "encoder.h"
 #include "led.h"
-#include "motor.h"
 #include "sensor.h"
+#include "encoder.h"
+#include "motor.h"
+#include "control.h"
 #include "misc.h"
 
 //Used for testing encoders
-unsigned long time;
+unsigned long currTime;
 unsigned long lastTime;
 
 
@@ -53,35 +50,33 @@ void setup() {
 }
 
 void loop() {
+    currTime = millis();
+    int period = currTime - lastTime;
 
-    //Writing to STBY on the motor driver should not be needed here, it doesn't work in in the setup for some reason.
-    //Try putting it in the setup but at the buttom.
-    //digitalWrite(STBY, HIGH);
-    //testMotors();
+    updateEncoders();
+    calcMotorPWM();
+
+
+    Serial.print("L: ");
+    Serial.print(leftEncoderChange);
+    Serial.print(" - R: ");
+    Serial.print(rightEncoderChange);
+    Serial.print(" - T: ");
+    Serial.print(targetSpeedX);
+    Serial.print(" - : I");
+    Serial.print(encoderFeedbackX);
+    Serial.print(" - E: ");
+    Serial.print(velErrorX);
+    Serial.print(" - PWMX:");
+    Serial.print(posPWMX);
     
-    //motorSweep();
+    Serial.print(" - S: ");
+    Serial.print(countsToSpeed((leftEncoderChange + rightEncoderChange)/2, period));
+    Serial.print("mm/s - Millis: ");
+    Serial.println(period);
 
-    //testMotors();
-    /*
-    // Testing encoders
-    time = millis();
-    int period = time - lastTime;
+    lastTime = currTime;
 
-    Serial.print("RightEnc CNT: ");
-    Serial.print(getRightEncCount());
-    Serial.print(" -- ");
-    Serial.print("LeftEnc CNT: ");
-    Serial.print(getLeftEncCount());
-    Serial.println();
+    delay(150);
 
-    Serial.println("Time: " + time);
-    Serial.println("LastTime: " + lastTime);
-    Serial.println("Period: " + period);
-    Serial.print("Speed: ");
-    Serial.println(countsToSpeed((getRightEncCount() + getLeftEncCount())/2, period));
-    lastTime = time; 
-    
-
-    delay(100);
-    */
 }
