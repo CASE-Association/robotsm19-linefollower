@@ -11,16 +11,33 @@ int rightEncoderOld = 0;;
 int rightEncoderChange;
 int leftEncoderChange;
 
-int targetSpeedX = speedToCounts(300*2); // 300 mm/s, * 2 because of rightEncChange + leftEncChange
-long encoderFeedbackX;
+int targetSpeedX = speedToCounts(150*2); // 300 mm/s, * 2 because of rightEncChange + leftEncChange
+int targetSpeedW = speedToCounts(50*2);   // no rotation. 
+
+int encoderFeedbackX;
+int encoderFeedbackW;
+
 int velErrorX;
+int velErrorW;
+
 int oldVelErrorX;
+int oldVelErrorW;
+
 int posPWMX;
+int posPWMW;
 
-float kpX = 0.2;
+float kpX = 0.5;
 float kiX = 0.1;
-float kdX = 0;
+float kdX = 0.1;
 
+float kpW = 0.5;
+float kiW = 0.1;
+float kdW = 0.1;
+
+/**
+ * @brief Function for updating the encoder variables for the control loop.
+ * 
+ */
 void updateEncoders(void){
 	leftEncoder = getLeftEncCount();
 	rightEncoder = getRightEncCount();
@@ -39,23 +56,21 @@ void updateEncoders(void){
  * @param period (ms) The time period between calls.
  */
 void calcMotorPWM(int period){    
-	encoderFeedbackX = (rightEncoderChange + leftEncoderChange) * 1000.0/period;
-	//encoderFeedbackW = rightEncoderChange - leftEncoderChange;	
-	
-	//rotationalFeedback = encoderFeedbackW;
+	encoderFeedbackX = (rightEncoderChange + leftEncoderChange) * 1000.0 / period;
+	encoderFeedbackW = (rightEncoderChange - leftEncoderChange) * 1000.0 / period;	
 	
 	velErrorX = targetSpeedX - encoderFeedbackX;
-	//posErrorW += curSpeedW - rotationalFeedback;
+	velErrorW = targetSpeedW - encoderFeedbackW;
 	
 	posPWMX = kpX * velErrorX + kdX * (velErrorX - oldVelErrorX);
-	//posPWMW = kpW * posErrorW + kdW * (posErrorW - oldPosErrorW);
+	posPWMW = kpW * velErrorW + kdW * (velErrorW - oldVelErrorW);
 	
 	oldVelErrorX = velErrorX;
-	//oldPosErrorW = posErrorW;
+	oldVelErrorW = velErrorW;
 
-	//leftBaseSpeed = posPwmX - posPwmW;
-	//rightBaseSpeed = posPwmX + posPwmW;
+	int leftBaseSpeed = posPWMX - posPWMW;
+	int rightBaseSpeed = posPWMX + posPWMW;
 
-	setLeftPWM(posPWMX);
-	setRightPWM(posPWMX);
+	setLeftPWM(leftBaseSpeed);
+	setRightPWM(rightBaseSpeed);
 }

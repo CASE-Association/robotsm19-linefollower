@@ -2,9 +2,15 @@
 #define CONTOL_H
 
 extern int targetSpeedX;
-extern long encoderFeedbackX;
+extern int targetSpeedW;
+
+
+extern int encoderFeedbackX;
+extern int encoderFeedbackW;
 extern int velErrorX;
+extern int velErrorW;
 extern int posPWMX;
+extern int posPWMW;
 extern int leftEncoderChange;
 extern int rightEncoderChange;
 
