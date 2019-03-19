@@ -7,7 +7,7 @@
 #define BIN2 19 // A5
 #define STBY 6  // D6
 #define PWMA 9  // D9 - Right Motor 
-#define PWMB 3  // D3 - Left Motor 
+#define PWMB 5  // D5 - Left Motor 
 
 
 
