@@ -35,66 +35,15 @@ void resetRightEncCount(void) {
     rightEncCounts = 0;
 }
 
-void changeA1() {
-    if (digitalRead(HALLA1)) {
-        if (!digitalRead(HALLB1)) {
-            leftEncCounts++;
-        } else {
-            leftEncCounts--;
-        }
-    } else {
-        if (digitalRead(HALLB1)) {
-            leftEncCounts++;
-        } else {
-            leftEncCounts--;
-        }
-    }
+void changeA1(){
+    (digitalRead(HALLA1) ? 
+    (digitalRead(HALLB1) ? leftEncCounts-- : leftEncCounts++) :  
+    (digitalRead(HALLB1 ? leftEncCounts ++ : leftEncCounts--)));
 }
 
-void changeB1() {
-    if (digitalRead(HALLB1)) {
-        if (digitalRead(HALLA1)) {
-            leftEncCounts++;
-        } else {
-            leftEncCounts--;
-        }
-    } else {
-        if (!digitalRead(HALLA1)) {
-            leftEncCounts++;
-        } else {
-            leftEncCounts--;
-        }
-    }
+void changeA2(){
+    (digitalRead(HALLA2) ? 
+    (digitalRead(HALLB2) ? leftEncCounts-- : leftEncCounts++) :  
+    (digitalRead(HALLB2 ? leftEncCounts ++ : leftEncCounts--)));
 }
 
-void changeA2() {
-    if (digitalRead(HALLA2)) {
-        if (!digitalRead(HALLB2)) {
-            rightEncCounts++;
-        } else {
-            rightEncCounts--;
-        }
-    } else {
-        if (digitalRead(HALLB2)) {
-            rightEncCounts++;
-        } else {
-            rightEncCounts--;
-        }
-    }
-}
-
-void changeB2() {
-    if (digitalRead(HALLB2)) {
-        if (digitalRead(HALLA2)) {
-            rightEncCounts++;
-        } else {
-            rightEncCounts--;
-        }
-    } else {
-        if (!digitalRead(HALLA2)) {
-            rightEncCounts++;
-        } else {
-            rightEncCounts--;
-        }
-    }
-}
