@@ -34,7 +34,7 @@ void updateEncoders(void){
 
 /**
  * @brief Function for running the control loop for velocity control.
- *        Implemented with a PD.
+ *        Implemented with P only.
  * 
  * @param period (ms) The time period between calls.
  */

@@ -2,9 +2,9 @@
 Code for the line follower robot that CASE will be using in the Swedish Robotic Championship 2019
 
 ### Contributors
-Oskar Johansson
-Isak Åslund
-
+    -   Oskar Johansson
+    -   Isak Åslund 
+    -   Stefan Larsson
 
 ### Pinout
 https://components101.com/microcontrollers/arduino-nano
