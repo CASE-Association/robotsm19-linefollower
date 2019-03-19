@@ -11,8 +11,15 @@ int rightEncoderOld = 0;;
 int rightEncoderChange;
 int leftEncoderChange;
 
-int targetSpeedX = speedToCounts(150*2); // 300 mm/s, * 2 because of rightEncChange + leftEncChange
-int targetSpeedW = speedToCounts(50*2);   // no rotation. 
+int targetSpeedX = speedToCounts(90*2); // 300 mm/s, * 2 because of rightEncChange + leftEncChange
+int targetSpeedW = speedToCounts(0*2);   // Initial rotation is none;
+int moveSpeedX    = speedToCounts(50*2);
+int maxSpeedX     = speedToCounts(90*2);
+int turnSpeed    = speedToCounts(100*2);  // Tweak to turn faster.
+
+
+int leftBaseSpeed;
+int rightBaseSpeed;
 
 int encoderFeedbackX;
 int encoderFeedbackW;
@@ -26,13 +33,13 @@ int oldVelErrorW;
 int posPWMX;
 int posPWMW;
 
-float kpX = 0.5;
-float kiX = 0.1;
-float kdX = 0.1;
+float kpX = 0.75;
+float kiX = 0.1; // Not Used
+float kdX = 0;
 
-float kpW = 0.5;
-float kiW = 0.1;
-float kdW = 0.1;
+float kpW = 1;
+float kiW = 0.1; // Not Used
+float kdW = 0;
 
 /**
  * @brief Function for updating the encoder variables for the control loop.
@@ -51,7 +58,7 @@ void updateEncoders(void){
 
 /**
  * @brief Function for running the control loop for velocity control.
- *        Implemented with P only.
+ *        Implemented with PD only.
  * 
  * @param period (ms) The time period between calls.
  */
@@ -68,8 +75,8 @@ void calcMotorPWM(int period){
 	oldVelErrorX = velErrorX;
 	oldVelErrorW = velErrorW;
 
-	int leftBaseSpeed = posPWMX - posPWMW;
-	int rightBaseSpeed = posPWMX + posPWMW;
+	leftBaseSpeed = posPWMX - posPWMW;
+    rightBaseSpeed = posPWMX + posPWMW;
 
 	setLeftPWM(leftBaseSpeed);
 	setRightPWM(rightBaseSpeed);

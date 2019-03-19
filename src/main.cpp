@@ -3,6 +3,7 @@
    Authors:
    Oskar Johansson - email@email.com
    Isak Åslund - aslundisak@gmail.com
+   Stefan Larsson - st
 */
 
 /*
@@ -24,16 +25,15 @@
 #include "encoder.h"
 #include "motor.h"
 #include "control.h"
+#include "algorithm.h"
 #include "misc.h"
 
 //Used for testing encoders
 unsigned long currTime;
 unsigned long lastTime;
-int osvlad = 0;
-int rotSpeed = speedToCounts(50*2);
 
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(115200);
 
     ledSetup();
     buttonSetup();
@@ -42,7 +42,7 @@ void setup() {
 
     delay(100);
     Serial.println("------  CASE - RobotSM19 - Linefollower  ------");
-    Serial.println("------  Press right button to start  ------");
+    Serial.println("------  Place middle sensor on line and press right button to start  ------");
 
     while(!readButtonRight());
     Serial.println("------ Let's go in 1s ------");
@@ -54,12 +54,13 @@ void loop() {
     currTime = millis();
     int period = currTime - lastTime;
 
-
-    //updateEncoders();
-    //calcMotorPWM(period);
+    control();    
+    updateEncoders();
+    calcMotorPWM(period);
     
+
 /*
-    if(currTime % 1000 > 0 && currTime % 1000 < 100){
+    if(currTime % 1000 > 0 && currTime % 1000 < 50){
         Serial.print("L: ");
         Serial.print(leftEncoderChange);
         Serial.print(" - R: ");
@@ -91,7 +92,4 @@ void loop() {
     }
 */
     lastTime = currTime;
-
-    //delay(10);
-
 }

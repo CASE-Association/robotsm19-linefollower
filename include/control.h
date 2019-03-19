@@ -3,6 +3,9 @@
 
 extern int targetSpeedX;
 extern int targetSpeedW;
+extern int turnSpeed;
+extern int moveSpeedX;
+extern int maxSpeedX;
 
 
 extern int encoderFeedbackX;
