@@ -54,13 +54,13 @@ void loop() {
     currTime = millis();
     int period = currTime - lastTime;
 
+    //testMotors();
     control();    
-    updateEncoders();
-    calcMotorPWM(period);
-    
+    //updateEncoders();
+    //calcMotorPWM(period);
 
-/*
-    if(currTime % 1000 > 0 && currTime % 1000 < 50){
+    /*
+    if(currTime % 1000 > 0 && currTime % 1000 < 10){
         Serial.print("L: ");
         Serial.print(leftEncoderChange);
         Serial.print(" - R: ");
@@ -73,8 +73,9 @@ void loop() {
         Serial.print(velErrorX);
         Serial.print(" - PWMX: ");
         Serial.print(posPWMX);
+        */
 
-
+/*
         Serial.print("----- T: ");
         Serial.print(targetSpeedW);
         Serial.print(" - FB: ");
@@ -83,8 +84,8 @@ void loop() {
         Serial.print(velErrorW);
         Serial.print(" - PWMW: ");
         Serial.print(posPWMW);
-
-
+*/
+/*
         Serial.print(" - S: ");
         Serial.print(countsToSpeed((leftEncoderChange + rightEncoderChange)/2, period));
         Serial.print("mm/s - Millis: ");

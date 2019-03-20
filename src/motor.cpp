@@ -15,9 +15,6 @@ void motorSetup(void) {
     pinMode(PWMB, OUTPUT);
 
     // Enable the motor driver and stop.
-    
-    //turnMotorsOff();
-    //delay(500);
     digitalWrite(STBY, HIGH);
 }
 

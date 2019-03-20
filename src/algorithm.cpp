@@ -3,25 +3,25 @@
 #include "sensor.h"
 #include "motor.h"
 #include "control.h"
-
-
-int lastMiddle = 1;
+int baseSpeed = 70;
+int tSpeed = 50;
+int turnMod = 40;
 void control(){
-    int middle = readMiddleSensor();
     
-    if(middle){
-        targetSpeedW = 0;
-        targetSpeedX = maxSpeedX;
+    
+    if(readMiddleSensor()){
+        //targetSpeedW = 0;
+        setLeftPWM(baseSpeed);
+        setRightPWM(baseSpeed);
     }
-    else if(lastMiddle != middle)
-        targetSpeedX = moveSpeedX;
-    else
-        targetSpeedX = maxSpeedX;
-
-    if(readLeftSensor())
-        targetSpeedW = turnSpeed;
-    if(readRightSensor())
-        targetSpeedW = -turnSpeed;
-
-    lastMiddle = middle;
+    if(readLeftSensor()){
+        //targetSpeedW = turnSpeed;
+        setLeftPWM(tSpeed - turnMod);
+        setRightPWM(tSpeed + turnMod);
+    }
+    if(readRightSensor()){
+        //targetSpeedW = -turnSpeed;
+        setLeftPWM(tSpeed + turnMod);
+        setRightPWM(tSpeed - turnMod);
+    }
 }
