@@ -52,10 +52,11 @@ void setup() {
 
 void loop() {
     currTime = millis();
-    int period = currTime - lastTime;
+    //int period = currTime - lastTime;
 
     //testMotors();
     control();    
+    //testSensors();
     //updateEncoders();
     //calcMotorPWM(period);
 

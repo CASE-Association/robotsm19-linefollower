@@ -1,7 +1,7 @@
 #ifndef LED_H
 #define LED_H
 
-#define LED_R 7  // D7 - Red
+#define LED_R 7  // D7 - Red (it's now A7 because we don't use the red led.)
 #define LED_O 16 // A2 - Orange
 
 //Macro functions

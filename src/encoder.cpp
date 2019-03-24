@@ -38,14 +38,14 @@ void resetRightEncCount(void) {
 }
 
 void changeA1() {
-    if (PIND & 0b1000) {
-        if (!(PINB & 0b1)) {
+    if (digitalRead(HALLA1)) {
+        if (!digitalRead(HALLB1)) {
             rightEncCounts++;
         } else {
             rightEncCounts--;
         }
     } else {
-        if (PINB & 0b1) {
+        if (digitalRead(HALLB1)) {
             rightEncCounts++;
         } else {
             rightEncCounts--;
@@ -54,14 +54,14 @@ void changeA1() {
 }
 
 void changeA2() {
-    if (PIND & 0b100) {
-        if (PIND & 0b10000) {
+    if (digitalRead(HALLA2)) {
+        if (digitalRead(HALLB2)) {
             leftEncCounts++;
         } else {
             leftEncCounts--;
         }
     } else {
-        if (!(PIND & 0b10000)) {
+        if (!digitalRead(HALLB2)) {
             leftEncCounts++;
         } else {
             leftEncCounts--;

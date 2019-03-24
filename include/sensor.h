@@ -1,7 +1,7 @@
 #ifndef SENSOR_H
 #define SENSOR_H
 
-#define SENSOR_LEFT     21    // A7
+#define SENSOR_LEFT     21    // A7 - D7 no
 #define SENSOR_MIDDLE   17    // A3 on now - D10 on new PCB 
 #define SENSOR_RIGHT    20    // A6
 
