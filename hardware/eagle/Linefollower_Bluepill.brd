@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.3.1">
+<eagle version="9.3.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -964,8 +964,8 @@ Rev. 1.1 Blue pill
 <text x="15.54121875" y="19.04718125" size="1.016" layer="27">5V</text>
 <text x="70.066459375" y="0.719278125" size="1.016" layer="27">Bat In</text>
 <text x="77.686459375" y="12.530278125" size="1.016" layer="27">Bat switch</text>
-<text x="78.909721875" y="16.726459375" size="1.016" layer="27" rot="R90">Buck in</text>
-<text x="78.909721875" y="28.156459375" size="1.016" layer="27" rot="R90">Buck out</text>
+<text x="72.606459375" y="29.040278125" size="1.016" layer="27">Buck in</text>
+<text x="72.606459375" y="20.150278125" size="1.016" layer="27">Buck out</text>
 <text x="16.508184375" y="48.201590625" size="0.8128" layer="27">RRIR</text>
 <text x="34.034184375" y="47.947590625" size="0.8128" layer="27">LLLIR</text>
 <text x="63.161721875" y="2.883459375" size="1.016" layer="27" rot="R90">Gnd</text>
