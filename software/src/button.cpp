@@ -20,7 +20,7 @@ void buttonSetup(void) {
  *        Has to be called consecutivly to know if the button was pressed or if it was noise.
  * @return (int) 0 means no press, positive means pressed.
  */
-int readButtonRight(void) {
+int readButton(void) {
     int buttonRightState = digitalRead(BUTTON);
     int returnVal = 0;
     // check to see if you just pressed the button

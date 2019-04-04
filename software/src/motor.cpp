@@ -60,7 +60,7 @@ void motorSweep(void){
 void setRightPWM(int speed) {
     if (speed > 255)
         speed = 255;
-    if (speed < -255)
+    if (speed < 0)
         speed = 0;
 
     analogWrite(RIGHTMOTOR, speed);
@@ -73,7 +73,7 @@ void setRightPWM(int speed) {
 void setLeftPWM(int speed) {
     if (speed > 255)
         speed = 255;
-    if (speed < -255)
+    if (speed < 0)
         speed = 0;
     
     analogWrite(LEFTMOTOR, speed);
