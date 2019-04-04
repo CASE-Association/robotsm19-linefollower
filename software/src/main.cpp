@@ -9,7 +9,7 @@
 /*
    Things to implement:
    LED - Implemented - NOT Verified
-   Button - NOT Implemented - NOT Verified
+   Button - Implemented - NOT Verified
    Motor - NOT Implemented - NOT Verified
    Encoder - NOT Implemented - NOT Verified
    Control - NOT Implemented - NOT Verified

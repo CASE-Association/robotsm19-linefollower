@@ -1,13 +1,12 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
+#include <Arduino.h>
 
-#define BUTTON_RIGHT 12
-#define BUTTON_LEFT 11
+#define BUTTON PIN_A0
 
 void buttonSetup(void);
-int readButtonRight(void);
-int readButtonLeft(void);
+int readButton(void);
 
 #endif
 
