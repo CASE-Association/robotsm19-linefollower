@@ -1,0 +1,6 @@
+{
+    "terminal.integrated.env.osx": {
+        "PATH": "/Users/isakaslund/.platformio/penv/bin:/Users/isakaslund/.platformio/penv:/usr/local/opt/jenv/shims:/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/local/bin:/opt/local/sbin",
+        "PLATFORMIO_CALLER": "vscode"
+    }
+}

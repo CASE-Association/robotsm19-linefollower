@@ -1,97 +1,119 @@
-/*
-   Code for CASE line following robot that will be attending the Robot Championship in Sweden 2019.
-   Authors:
-   Oskar Johansson - email@email.com
-   Isak Åslund - aslundisak@gmail.com
-   Stefan Larsson - st
-*/
-
-/*
-   Things to implement:
-   LED - Implemented - Verified
-   Button - Implemented - Verified
-   Motor - Implemented - Verified
-   Encoder - Implemented - NOT TESTED
-   Control - (Control loop for maintaining a certain speed and acceleration)
-   Sensors - Implemented  - Verified
-   Algorithm - (The algorithm used to decide how to drive the robot, this will probably not be needed in the start since the controller will take care of it. Only if we need more advanced techics.
-*/
-
-// Important - Rember to only include library files such as <Wire.h> in this file (the main file) because of how the compiler works in Arduino IDE.
 #include <Arduino.h>
-#include "button.h"
-#include "led.h"
-#include "sensor.h"
-#include "encoder.h"
-#include "motor.h"
-#include "control.h"
-#include "algorithm.h"
-#include "misc.h"
+#include <QTRSensors.h>
+QTRSensors qtr;
 
-//Used for testing encoders
-unsigned long currTime;
-unsigned long lastTime;
+const uint8_t SensorCount = 8;
+uint16_t sensorValues[SensorCount];
+
+const uint8_t leftMotor = PA7;
+const uint8_t rightMotor = PB0;
+const uint8_t button = PB3; 
+int lastError;
+int lastTime;
+float KP = 0.06;
+float KD = 0.8;
+
+/* 
+Drifter: KP = 0.04, KD = 0.4
+*/
+
+int baseSpeed = 150;
 
 void setup() {
-    Serial.begin(115200);
+    Serial.begin(9600);
+    Serial.println("---- Setting up system ----");
+    pinMode(leftMotor, OUTPUT);
+    pinMode(rightMotor, OUTPUT);
+    pinMode(button, INPUT_PULLUP);
 
-    ledSetup();
-    buttonSetup();
-    motorSetup();
-    encoderSetup();
 
-    delay(100);
-    Serial.println("------  CASE - RobotSM19 - Linefollower  ------");
-    Serial.println("------  Place middle sensor on line and press right button to start  ------");
+    // configure the sensors
+    qtr.setTypeRC();
+    qtr.setSensorPins((const uint8_t[]){PA9, PA8, PB15, PB14, PA11, PB13, PB12, PA10}, SensorCount);
+    qtr.setEmitterPin(2);
 
-    while(!readButtonRight());
-    Serial.println("------ Let's go in 1s ------");
-    LED_O_ON();
+    delay(500);
+    Serial.println("---- Waiting for button press to start ----");
+    while(digitalRead(button));
+
+    pinMode(LED_BUILTIN, OUTPUT);
+    digitalWrite(LED_BUILTIN, HIGH);
+    Serial.println("----    Calibrating sensors, move robot over the line for 5s, until red led stops   ----");
+
+    for (uint16_t i = 0; i < 256; i++) {
+        qtr.calibrate();
+    }
+    digitalWrite(LED_BUILTIN, LOW);  // turn off Arduino's LED to indicate we are through with calibration
+    Serial.println("----    Calibration done    ----");
+
+    for (uint8_t i = 0; i < SensorCount; i++) {
+        Serial.print(qtr.calibrationOn.minimum[i]);
+        Serial.print(' ');
+    }
+    Serial.println();
+
+    // print the calibration maximum values measured when emitters were on
+    for (uint8_t i = 0; i < SensorCount; i++) {
+        Serial.print(qtr.calibrationOn.maximum[i]);
+        Serial.print(' ');
+    }
+    Serial.println("------------------------ LET'S GO!!!! ----------------------------");
+    Serial.println();
     delay(1000);
 }
 
 void loop() {
-    currTime = millis();
-    //int period = currTime - lastTime;
-
-    //testMotors();
-    control();    
-    //testSensors();
-    //updateEncoders();
-    //calcMotorPWM(period);
-
     /*
-    if(currTime % 1000 > 0 && currTime % 1000 < 10){
-        Serial.print("L: ");
-        Serial.print(leftEncoderChange);
-        Serial.print(" - R: ");
-        Serial.print(rightEncoderChange);
-        Serial.print(" - T: ");
-        Serial.print(targetSpeedX);
-        Serial.print(" - FB: ");
-        Serial.print(encoderFeedbackX);
-        Serial.print(" - E: ");
-        Serial.print(velErrorX);
-        Serial.print(" - PWMX: ");
-        Serial.print(posPWMX);
-        */
-
-/*
-        Serial.print("----- T: ");
-        Serial.print(targetSpeedW);
-        Serial.print(" - FB: ");
-        Serial.print(encoderFeedbackW);
-        Serial.print(" - E: ");
-        Serial.print(velErrorW);
-        Serial.print(" - PWMW: ");
-        Serial.print(posPWMW);
-*/
-/*
-        Serial.print(" - S: ");
-        Serial.print(countsToSpeed((leftEncoderChange + rightEncoderChange)/2, period));
-        Serial.print("mm/s - Millis: ");
-        Serial.println(period);
-    }
-*/
+    // read calibrated sensor values and obtain a measure of the line position
+    // from 0 to 5000 (for a white line, use readLineWhite() instead)
+    int currTime = millis();
+    int timeDiff = currTime - lastTime; 
     lastTime = currTime;
+    int position = qtr.readLineBlack(sensorValues);
+    int error = position - 3500;
+
+    int motorSpeed = KP * error + KD * (error - lastError);
+    lastError = error;
+
+    int leftSpeed = baseSpeed - motorSpeed;
+    int rightSpeed = baseSpeed + motorSpeed;
+
+    if(leftSpeed > 255)
+        leftSpeed = 255;
+    else if(leftSpeed < 0)
+        leftSpeed = 0;
+
+    if(rightSpeed > 255)
+        rightSpeed = 255;
+    else if(rightSpeed < 0)
+        rightSpeed = 0;
+
+    analogWrite(leftMotor, leftSpeed);
+    analogWrite(rightMotor, rightSpeed);
+*/
+
+
+    // print the sensor values as numbers from 0 to 1000, where 0 means maximum
+    // reflectance and 1000 means minimum reflectance, followed by the line
+    // position
+    for (uint8_t i = 0; i < SensorCount; i++) {
+        Serial.print(sensorValues[i]);
+        Serial.print('\t');
+    }
+    delay(150);
+    /*
+    Serial.print("Position: ");
+    Serial.print(position);
+    Serial.print("    Error: ");
+    Serial.print(error);
+    Serial.print("   Control Signal: ");
+    Serial.print(motorSpeed);
+    Serial.print("L: ");
+    Serial.print(leftSpeed);
+    Serial.print("R: ");
+    Serial.print(rightSpeed);
+    Serial.println();
+
+    delay(150);
+    */
 }
