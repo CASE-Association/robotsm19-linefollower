@@ -1,23 +1,22 @@
 /*
    Code for CASE line following robot that will be attending the Robot Championship in Sweden 2019.
    Authors:
-   Oskar Johansson - email@email.com
-   Isak Åslund - aslundisak@gmail.com
-   Stefan Larsson - st
+   Oskar Johansson - oskaj@chalmers.se
+   Isak Åslund - isakas@chalmers.se
+   Stefan Larsson - stek@caselabbet.se
 */
 
 /*
    Things to implement:
-   LED - Implemented - Verified
-   Button - Implemented - Verified
-   Motor - Implemented - Verified
-   Encoder - Implemented - NOT TESTED
-   Control - (Control loop for maintaining a certain speed and acceleration)
-   Sensors - Implemented  - Verified
-   Algorithm - (The algorithm used to decide how to drive the robot, this will probably not be needed in the start since the controller will take care of it. Only if we need more advanced techics.
+   LED - Implemented - NOT Verified
+   Button - NOT Implemented - NOT Verified
+   Motor - NOT Implemented - NOT Verified
+   Encoder - NOT Implemented - NOT Verified
+   Control - NOT Implemented - NOT Verified
+   Sensors - NOT Implemented - NOT Verified
+   Algorithm - NOT Implemented - NOT Verified
 */
 
-// Important - Rember to only include library files such as <Wire.h> in this file (the main file) because of how the compiler works in Arduino IDE.
 #include <Arduino.h>
 #include "button.h"
 #include "led.h"
