@@ -22,15 +22,10 @@
 #include "button.h"
 #include "motor.h"
 #include "sensor.h"
-#include "encoder.h"
 
 #include "control.h"
 #include "algorithm.h"
 #include "misc.h"
-
-//Used for testing encoders
-unsigned long currTime;
-unsigned long lastTime;
 
 void setup() {
     Serial.begin(115200);
@@ -38,60 +33,22 @@ void setup() {
     ledSetup();
     buttonSetup();
     motorSetup();
-    encoderSetup();
 
     delay(100);
     Serial.println("------  CASE - RobotSM19 - Linefollower  ------");
     Serial.println("------  Place middle sensor on line and press right button to start  ------");
 
-    while(!readButtonRight());
+    while(!readButton());
     Serial.println("------ Let's go in 1s ------");
     LED_O_ON();
     delay(1000);
 }
 
 void loop() {
-    currTime = millis();
-    //int period = currTime - lastTime;
 
-    //testMotors();
-    control();    
+    //testLEDS();
+    //testMotors();  
     //testSensors();
     //updateEncoders();
     //calcMotorPWM(period);
-
-    /*
-    if(currTime % 1000 > 0 && currTime % 1000 < 10){
-        Serial.print("L: ");
-        Serial.print(leftEncoderChange);
-        Serial.print(" - R: ");
-        Serial.print(rightEncoderChange);
-        Serial.print(" - T: ");
-        Serial.print(targetSpeedX);
-        Serial.print(" - FB: ");
-        Serial.print(encoderFeedbackX);
-        Serial.print(" - E: ");
-        Serial.print(velErrorX);
-        Serial.print(" - PWMX: ");
-        Serial.print(posPWMX);
-        */
-
-/*
-        Serial.print("----- T: ");
-        Serial.print(targetSpeedW);
-        Serial.print(" - FB: ");
-        Serial.print(encoderFeedbackW);
-        Serial.print(" - E: ");
-        Serial.print(velErrorW);
-        Serial.print(" - PWMW: ");
-        Serial.print(posPWMW);
-*/
-/*
-        Serial.print(" - S: ");
-        Serial.print(countsToSpeed((leftEncoderChange + rightEncoderChange)/2, period));
-        Serial.print("mm/s - Millis: ");
-        Serial.println(period);
-    }
-*/
-    lastTime = currTime;
 }
