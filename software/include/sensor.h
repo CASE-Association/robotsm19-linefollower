@@ -1,16 +1,12 @@
 #ifndef SENSOR_H
 #define SENSOR_H
 
-#define SENSOR_LEFT     21    // A7 - D7 no
-#define SENSOR_MIDDLE   17    // A3 on now - D10 on new PCB 
-#define SENSOR_RIGHT    20    // A6
+#define SENSOR_COUNT 8
+#define EMITTER_PIN 12 // D12 
 
 void sensorSetup(void);
 void testSensors(void);
-
-int readLeftSensor(void);
-int readMiddleSensor(void);
-int readRightSensor(void);
+void control(void);
 
 
 #endif
