@@ -33,8 +33,10 @@ void setup() {
     Serial.println("------  Press to calibrate  ------");
 
     while(!readButton());
+    LED_O_ON();
     sensorSetup();
     delay(50);
+    LED_O_OFF();
 
     Serial.println("------  Press to START  ------");
     while(!readButton());
@@ -47,6 +49,6 @@ void loop() {
 
     //testLEDS();
     //testMotors();  
-    testSensors();
-    //control();
+    //testSensors();
+    control();
 }

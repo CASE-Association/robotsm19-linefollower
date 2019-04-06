@@ -10,9 +10,9 @@ uint16_t sensorValues[SENSOR_COUNT];
 
 int lastError;
 int lastTime;
-float KP = 0.06;
-float KD = 0.8;
-int baseSpeed = 150;
+float KP = 0.13; 
+float KD = 1; 
+int baseSpeed = 255;
 
 void sensorSetup(void){
     qtr.setTypeRC();
