@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.3.1">
+<eagle version="9.3.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -2257,7 +2257,6 @@ In this library the device names are the same as the pin names of the symbols, t
 <part name="SUPPLY20" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="SUPPLY21" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="P+8" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
-<part name="SUPPLY22" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="V+" device=""/>
 <part name="IRLL" library="CASE-JST" deviceset="EH_B3B-EH" device="" package3d_urn="urn:adsk.eagle:package:5644951/1"/>
 <part name="IRRR" library="CASE-JST" deviceset="EH_B3B-EH" device="" package3d_urn="urn:adsk.eagle:package:5644951/1"/>
 <part name="SUPPLY23" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
@@ -2490,9 +2489,6 @@ Green - directly to power
 </instance>
 <instance part="P+8" gate="1" x="-42.164" y="54.356" smashed="yes">
 <attribute name="VALUE" x="-44.704" y="49.276" size="1.778" layer="96" rot="R90"/>
-</instance>
-<instance part="SUPPLY22" gate="1" x="28.956" y="49.276" smashed="yes">
-<attribute name="VALUE" x="27.686" y="50.546" size="1.778" layer="96"/>
 </instance>
 <instance part="IRLL" gate="G$1" x="-16.51" y="3.048" smashed="yes" rot="R270">
 <attribute name="NAME" x="-10.795" y="9.398" size="1.778" layer="95" rot="R270"/>
@@ -2812,12 +2808,6 @@ Green - directly to power
 <wire x1="-140.208" y1="-40.386" x2="-142.748" y2="-40.386" width="0.1524" layer="91"/>
 <wire x1="-142.748" y1="-40.386" x2="-142.748" y2="-37.846" width="0.1524" layer="91"/>
 <pinref part="SUPPLY16" gate="1" pin="V+"/>
-</segment>
-<segment>
-<pinref part="U$1" gate="G$1" pin="VBAT"/>
-<wire x1="13.716" y1="44.196" x2="28.956" y2="44.196" width="0.1524" layer="91"/>
-<wire x1="28.956" y1="44.196" x2="28.956" y2="46.736" width="0.1524" layer="91"/>
-<pinref part="SUPPLY22" gate="1" pin="V+"/>
 </segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="IN"/>
