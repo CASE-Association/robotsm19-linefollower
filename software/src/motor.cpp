@@ -7,6 +7,10 @@
 void motorSetup(void) {
     pinMode(LEFTMOTOR, OUTPUT);
     pinMode(RIGHTMOTOR, OUTPUT);
+    pinMode(AIN1,OUTPUT);
+    pinMode(AIN2,OUTPUT);
+    pinMode(BIN1,OUTPUT);
+    pinMode(BIN2,OUTPUT);
 }
 
 /**
@@ -58,12 +62,24 @@ void motorSweep(void){
  * @param speed (int) The disered raw speed. 
  */
 void setRightPWM(int speed) {
-    if (speed > 255)
+    if (speed > 255) {
         speed = 255;
-    if (speed < 0)
-        speed = 0;
+    }
+    if (speed < -255) {
+        speed = -255;
+    }
+    if(speed >= 0) {
+        digitalWrite(AIN2,LOW);
+        digitalWrite(AIN1,HIGH);
+        analogWrite(RIGHTMOTOR, speed);
+    }
+    else {
+        digitalWrite(AIN2,HIGH);
+        digitalWrite(AIN1,LOW);
+        analogWrite(RIGHTMOTOR, -speed);
+    }
 
-    analogWrite(RIGHTMOTOR, speed);
+    
 }
 
 /*
@@ -71,10 +87,20 @@ void setRightPWM(int speed) {
  * @param speed (int) The disered raw speed. 
  */
 void setLeftPWM(int speed) {
-    if (speed > 255)
+    if (speed > 255) {
         speed = 255;
-    if (speed < 0)
-        speed = 0;
-    
-    analogWrite(LEFTMOTOR, speed);
+    }
+    if (speed < -255) {
+        speed = -255;
+    }
+    if(speed >= 0) {
+        digitalWrite(BIN2,LOW);
+        digitalWrite(BIN1,HIGH);
+        analogWrite(LEFTMOTOR, speed);
+    }
+    else {
+        digitalWrite(BIN2,HIGH);
+        digitalWrite(BIN1,LOW);
+        analogWrite(LEFTMOTOR, -speed);
+    }
 }
