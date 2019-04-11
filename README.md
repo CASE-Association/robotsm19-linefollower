@@ -1,7 +1,7 @@
 # CASE line follower robot 2019
 Project repository for CASE hardware and software developement for attending the Swedish Robotic Championship 2019.
 The robot got 2nd place in the Swedish Robotic Championship 2019.
-![Diploma](https://i.imgur.com/QrNVJYN.jpg)
+![Diploma](https://i.imgur.com/zk2pDSN.jpg)
 
 ### Contributors
     -   Oskar Johansson
