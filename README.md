@@ -9,8 +9,9 @@ The robot got 2nd place in the Swedish Robotic Championship 2019.
     -   Stefan Larsson
 
 ### Structure
-    -   Software - All code for running the robot
+    -   Software - All code for running the robot, implemented on Arduino   
     -   Hardware - PCB and hardware design
+        -   Schematics for Arduino & STM32F103C8
 
 ### Pictures
 [Picture album](https://imgur.com/a/kjrejrC)
